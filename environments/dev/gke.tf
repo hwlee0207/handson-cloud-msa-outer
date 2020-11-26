@@ -1,6 +1,6 @@
 # GKE cluster
 resource "google_container_cluster" "primary" {
-  provider = googld-beta
+  provider = google-beta
   name     = "${var.project_id}-${var.member_id}-dev"
   location = var.region
   node_locations = var.zones
