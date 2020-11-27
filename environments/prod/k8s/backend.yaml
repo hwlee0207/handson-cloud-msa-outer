@@ -41,3 +41,15 @@ spec:
     app: eshop-backend
   ports:
   - port: 8090
+---
+apiVersion: v1
+kind: HorizontalPodAutoscaler 
+metadata:
+  name: eshop-backend
+spec:
+
+  type: ClusterIP
+  selector:
+    app: eshop-backend
+  ports:
+  - port: 809

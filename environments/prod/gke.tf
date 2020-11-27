@@ -1,7 +1,7 @@
 # GKE cluster
 resource "google_container_cluster" "primary" {
   provider = google-beta
-  name     = "${var.project_id}-${var.member_id}-dev"
+  name     = "${var.project_id}-${var.member_id}-prod"
   location = var.region
   node_locations = var.zones
 
@@ -30,7 +30,7 @@ resource "google_container_cluster" "primary" {
 
 # Separately Managed Node Pool
 resource "google_container_node_pool" "primary_nodes" {
-  name       = "${google_container_cluster.primary.name}-np"
+  name       = "${google_container_cluster.primary.name}"
   location   = var.region
   cluster    = google_container_cluster.primary.name
   node_count = var.gke_num_nodes
@@ -48,7 +48,7 @@ resource "google_container_node_pool" "primary_nodes" {
 
     # preemptible  = true
     machine_type = var.machine_type
-    tags         = ["gke-node", "${var.project_id}-${var.member_id}-dev"]
+    tags         = ["gke-node", "${var.project_id}-${var.member_id}-prod"]
     metadata = {
       disable-legacy-endpoints = "true"
     }
