@@ -21,7 +21,7 @@ pipeline {
   stages {
     // [START tf-init, tf-validate]
     stage('TF init & validate') {
-      when { anyOf {branch "dev";changeRequest() } }
+      when { anyOf {branch "dev";branch "prod";changeRequest() } }
       steps {
         container('terraform') {
           sh '''
@@ -57,7 +57,7 @@ pipeline {
 
     // [START tf-plan]
     stage('TF plan') {
-      when { anyOf {branch "dev";changeRequest() } }
+      when { anyOf {branch "dev";branch "prod";changeRequest() } }
       steps {
         container('terraform') {
           sh '''
