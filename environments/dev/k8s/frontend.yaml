@@ -1,8 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: eshop-frontend
+  name: eshop-frontend-v1
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: eshop-frontend
@@ -10,10 +11,39 @@ spec:
     metadata:
       labels:
         app: eshop-frontend
+        version: v1
     spec:
       containers:
         - name: eshop-frontend
           image: gcr.io/architect-certification-289902/24/eshop-frontend@sha256:ea5adf0e22357478a8a02130a59fa4573d5ca7bbd425f487f04ab87b22ae2838
+          ports:
+          - containerPort: 8080
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eshop-frontend-v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eshop-frontend
+  template:
+    metadata:
+      labels:
+        app: eshop-frontend
+        version: v2
+    spec:
+      containers:
+        - name: eshop-frontend
+          image: gcr.io/architect-certification-289902/24/eshop-frontend@sha256:0d5cf21889f2d3ff067a16118c40828e778d3f1e6f1a5339f2b91c5f9235fb6a
           ports:
           - containerPort: 8080
           resources:
