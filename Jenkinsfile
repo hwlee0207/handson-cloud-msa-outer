@@ -92,7 +92,7 @@ pipeline {
     // [START tf-apply]
     stage('TF Apply') {
       // when { anyOf {branch "dev" } }
-      when { anyOf {branch "dev";branch "prod";changeRequest() } }
+      when { anyOf {branch "dev";branch "prod" } }
       steps {
         container('terraform') {
           sh '''
